@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./index.css";
+import { ShopCard } from "./components/ShopCard";
+import Form from "./components/Form";
 
 export function App() {
   const [myName, setMyName] = useState("Solli");
@@ -7,18 +9,8 @@ export function App() {
 
   return (
     <>
-      <h2>Hello world</h2>
-      <div>myName</div>
-      <div>{myName}</div>
-      <div>
-        <input value={myName} onChange={(e) => setMyName(e.target.value)} />
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button onClick={() => alert("submitted:" + email)}>Submit</button>
-      </div>
+      <ShopCard />
+      <Form />
     </>
   );
 }

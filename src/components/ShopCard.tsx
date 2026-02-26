@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Input } from "./Input";
 import {
   Card,
   CardAction,
@@ -9,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { Input } from "./Input";
 
 export function ShopCard() {
   const [input, setInput] = useState<string>("");
