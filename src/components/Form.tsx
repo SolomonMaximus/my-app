@@ -1,5 +1,11 @@
 const Form = () => {
-  return <div></div>;
+  return (
+    <div>
+      <form>
+        <label
+      </form>
+    </div>
+  );
 };
 export default Form;
 
