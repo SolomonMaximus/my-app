@@ -42,7 +42,7 @@ export default function ExtensiveForm() {
     setLastName("");
     setEmail("");
     setMobile("");
-    setGenderOption("-1");
+    setGenderOption("");
     setYesNo("");
   };
 
@@ -52,6 +52,7 @@ export default function ExtensiveForm() {
         <Card className=" border-0  bg-gray-800">
           <CardContent className="p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="text-white text-center"> Example </div>
               <Input
                 placeholder="First Name"
                 value={firstName}
@@ -77,7 +78,7 @@ export default function ExtensiveForm() {
               />
 
               <Select onValueChange={(value) => setGenderOption(value)}>
-                <SelectTrigger className="w-45">
+                <SelectTrigger className="w-45 text-white">
                   <SelectValue placeholder="Select a gender" />
                 </SelectTrigger>
                 <SelectContent>
@@ -92,17 +93,21 @@ export default function ExtensiveForm() {
 
               <Label className="text-white">Do you like React?</Label>
               <RadioGroup onValueChange={(value) => setYesNo(value)}>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="yes" id="yes" />
+                <div className="flex items-center space-x-2 text-white">
+                  <RadioGroupItem
+                    className="bg-amber-200"
+                    value="yes"
+                    id="yes"
+                  />
                   <Label htmlFor="yes">Yes</Label>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="no" id="no" />
+                <div className="flex items-center space-x-2 text-white">
+                  <RadioGroupItem className="bg-amber-200" value="no" id="no" />
                   <Label htmlFor="no">No</Label>
                 </div>
               </RadioGroup>
 
-              <Button className="bg-red-400" type="submit">
+              <Button className="bg-red-400 text-white" type="submit">
                 SUBMIT
               </Button>
               <Button type="button" onClick={handleEdit}>
