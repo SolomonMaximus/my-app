@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,36 +14,50 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 
+type FormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  mobile: string;
+  genderOption: string;
+  yesNo: string;
+};
+
 export default function ExtensiveForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [genderOption, setGenderOption] = useState("");
-  const [yesNo, setYesNo] = useState("");
+  const dataRef = useRef<FormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobile: "",
+    genderOption: "",
+    yesNo: "",
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const d = dataRef.current;
     alert(
       [
-        `First Name: ${firstName}`,
-        `Last Name: ${lastName}`,
-        `Email: ${email}`,
-        `Mobile number: ${mobile}`,
-        `Gender: ${genderOption}`,
-        `Yes/No: ${yesNo}`,
+        `First Name: ${d.firstName}`,
+        `Last Name: ${d.lastName}`,
+        `Email: ${d.email}`,
+        `Mobile number: ${d.mobile}`,
+        `Gender: ${d.genderOption}`,
+        `Yes/No: ${d.yesNo}`,
       ].join("\n"),
     );
   };
 
   const handleEdit = () => {
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setMobile("");
-    setGenderOption("");
-    setYesNo("");
+    dataRef.current = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      mobile: "",
+      genderOption: "",
+      yesNo: "",
+    };
   };
 
   return (
@@ -53,31 +67,32 @@ export default function ExtensiveForm() {
           <CardContent className="p-6">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="text-white text-center"> Example </div>
+
               <Input
                 placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => (dataRef.current.firstName = e.target.value)}
               />
 
               <Input
                 placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => (dataRef.current.lastName = e.target.value)}
               />
 
               <Input
                 placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => (dataRef.current.email = e.target.value)}
               />
 
               <Input
                 placeholder="Mobile number"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
+                onChange={(e) => (dataRef.current.mobile = e.target.value)}
               />
 
-              <Select onValueChange={(value) => setGenderOption(value)}>
+              <Select
+                onValueChange={(value) =>
+                  (dataRef.current.genderOption = value)
+                }
+              >
                 <SelectTrigger className="w-45 text-white">
                   <SelectValue placeholder="Select a gender" />
                 </SelectTrigger>
@@ -92,7 +107,10 @@ export default function ExtensiveForm() {
               </Select>
 
               <Label className="text-white">Do you like React?</Label>
-              <RadioGroup onValueChange={(value) => setYesNo(value)}>
+              <RadioGroup
+                onValueChange={(value) => (dataRef.current.yesNo = value)}
+                className="grid w-full grid-cols-2 gap-4"
+              >
                 <div className="flex items-center space-x-2 text-white">
                   <RadioGroupItem
                     className="bg-amber-200"
